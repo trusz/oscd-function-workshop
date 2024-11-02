@@ -9,7 +9,7 @@ export default defineConfig({
 	},
 	build: {
 		lib: {
-			entry:   "src/plugin.ts",
+			entry:   "src/plugin.svelte.ts",
 			fileName: "index",
 			formats: ["es"],
 		},

@@ -1,20 +1,26 @@
 import Plugin from './plugin.svelte'
 import * as pkg from "../package.json";
+import { mount } from "svelte";
 
+type Exports = Record<string, any>
 
 export default class NewOSCDPlugin extends HTMLElement {
 
-	private plugin?: Plugin
+	private plugin?: Exports
+	private props = $state({
+		doc: this._doc,
+		editCount: -1
+	})
 	
 	connectedCallback() {
 		this.attachShadow({ mode: "open" });
-		this.plugin = new Plugin({
-			target: this.shadowRoot!,
-			props: {
-				doc: this._doc,
-				editCount: -1
-			}
-		});
+		// this.plugin = mount(Plugin, {
+		this.plugin = mount(Plugin, {
+        			target: this.shadowRoot!,
+        			props: this.props,
+        		});
+
+			
 
 		const linkElement = createStyleLinkElement()
 		this.shadowRoot?.appendChild(linkElement)
@@ -27,7 +33,9 @@ export default class NewOSCDPlugin extends HTMLElement {
 			return
 		}
 
-		this.plugin.$set({doc: newDoc})
+		// this.plugin.doc = newDoc
+		this.props.doc = newDoc
+		// this.plugin.$set({doc: newDoc})
 	}
 
 	public set editCount(newCount: number) {
