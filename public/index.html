@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<link rel="icon"
+		  type="image/svg+xml"
+		  href="/vite.svg" />
+	<meta name="viewport"
+		  content="width=device-width, initial-scale=1.0" />
+	<title>Vite + Svelte + TS</title>
+</head>
+
+<body>
+	<div>
+		<span>Your plugin is available at</span>
+		<pre class="js-info-url"></pre>
+	</div>
+
+	<hr />
+
+	<div id="app">
+		<new-oscd-plugin></new-oscd-plugin>
+	</div>
+	<script type="module">
+		import NewOSCDPlugin from './index.js';
+		customElements.define('new-oscd-plugin', NewOSCDPlugin);
+
+		const xmlString = `<SCL></SCL>`
+		const parser = new DOMParser();
+		const xmlDoc = parser.parseFromString(xmlString, "application/xml");
+		document.querySelector('new-oscd-plugin').doc = xmlDoc
+
+	</script>
+
+	<script>
+		const path = location.href + 'index.js';
+		document.querySelector('.js-info-url').innerText = path;
+	</script>
+	<style>
+
+	</style>
+</body>
+
+</html>
