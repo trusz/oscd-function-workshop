@@ -15,7 +15,7 @@
 <h4>Function Workshop</h4>
 
 {#if doc}
-	<h2>Welcome to new-oscd-plugin</h2>
+	<h2>Welcome to oscd-function-workshop</h2>
 {/if}
 
 <input type="hidden" name="package-name" value={pckg.name} />
